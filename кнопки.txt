@@ -1,0 +1,56 @@
+negative  = красный
+positive  = зеленый
+primary   = синий
+secondary = белый
+
+
+пРиМеР::::::::
+
+keyboard = {
+    "one_time": True,
+    "buttons": [
+        [{
+                "action": {
+                    "type": "text",
+                    "label": "Темная"
+                },
+                "color": "negative"
+            },
+            {
+                "action": {
+                    "type": "text",
+                    "label": "светлаЯ"
+                },
+                "color": "positive"
+            },
+            {
+                "action": {
+                    "type": "text",
+                    "label": "примари"
+                },
+                "color": "primary"
+            },
+            {
+                "action": {
+                    "type": "text",
+                    "label": "сэкондари"
+                },
+                "color": "secondary"
+            }
+        ]
+    ]
+}
+
+keyboard = json.dumps(keyboard, ensure_ascii=False).encode('utf-8')
+keyboard = str(keyboard.decode('utf-8'))
+
+
+
+
+Убрать кнопки можно так::::::::
+global keyboard
+
+keyboard = {"buttons":[],"one_time":True}
+
+keyboard = json.dumps(keyboard, ensure_ascii=False).encode('utf-8')
+keyboard = str(keyboard.decode('utf-8'))
