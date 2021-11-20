@@ -2,6 +2,8 @@ from vkbottle.bot import Message
 from vkbottle import Keyboard, KeyboardButtonColor, Text
 from vkbottle.bot import Blueprint
 from sqlighter import SQLighter
+from settings import smiles, greetings
+import random
 
 
 db = SQLighter('bot_vk.db')
@@ -29,7 +31,7 @@ async def menu(message: Message):
     )
 
     if db.get_city(userInfo.id) == 'родная деревня':
-        await message.answer(f'{db.get_nickname(userInfo.id)}, ты сейчас в  поселении {db.get_city(userInfo.id)}! \n💰Баланс:{db.get_balance(userInfo.id)}')
+        await message.answer(f'{random.choice(smiles)}{random.choice(greetings)} {db.get_nickname(userInfo.id)}, ты сейчас в  поселении {db.get_city(userInfo.id)}! \n💰Баланс:{db.get_balance(userInfo.id)}', keyboard=keyboard)
     
     else:
-        await message.answer(f'{db.get_nickname(userInfo.id)}, ты сейчас в  городе {db.get_city(userInfo.id)}! \n💰Баланс:{db.get_balance(userInfo.id)}')
+        await message.answer(f'{db.get_nickname(userInfo.id)}, ты сейчас в  городе {db.get_city(userInfo.id)}! \n💰Баланс:{db.get_balance(userInfo.id)}', keyboard=keyboard)
