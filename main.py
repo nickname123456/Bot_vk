@@ -4,8 +4,6 @@ from settings import token
 
 bot = Bot(token=token)
 
-#Список дневников учеников
-#diarys = {}
 
 print('')
 print('-------------------------------')

@@ -8,7 +8,8 @@ class SQLighter:
         self.cursor.execute("""CREATE TABLE IF NOT EXISTS users ( 
                 id INT,
                 nickname TEXT,
-                balance INT
+                balance INT,
+                city TEXT
                 )""")
 
 
@@ -20,25 +21,35 @@ class SQLighter:
 
     def add_user(self, id, nickname, balance):
 	    with self.connection:
-	        return self.cursor.execute('INSERT INTO users VALUES (?,?,?)',(id, nickname, balance))
+	        return self.cursor.execute('INSERT INTO users VALUES (?,?,?,?)',(id, nickname, balance, 'родная деревня'))
     
 
     
     def get_nickname(self, id):
         with self.connection:
-            return self.cursor.execute('SELECT nickname FROM `users` WHERE `id` = ?', (id,)).fetchone()
+            return self.cursor.execute('SELECT nickname FROM `users` WHERE `id` = ?', (id,)).fetchone()[0]
 
     def get_balance(self, id):
         with self.connection:
-            return self.cursor.execute('SELECT balance FROM `users` WHERE `id` = ?', (id,)).fetchone()
+            return self.cursor.execute('SELECT balance FROM `users` WHERE `id` = ?', (id,)).fetchone()[0]
+
+    def get_city(self, id):
+        with self.connection:
+            return self.cursor.execute('SELECT city FROM `users` WHERE `id` = ?', (id,)).fetchone()[0]
     
 
 
     def edit_nickname(self, id, nickname):
+        print(id)
+        print(nickname)
         with self.connection:
             return self.cursor.execute("UPDATE `users` SET `nickname` = ? WHERE `id` = ?", (nickname, id))
 
-    def edit_nickname(self, id, balance):
+    def edit_balance(self, id, balance):
         with self.connection:
             return self.cursor.execute("UPDATE `users` SET `balance` = ? WHERE `id` = ?", (balance, id))
+    
+    def edit_city(self, id, city):
+        with self.connection:
+            return self.cursor.execute("UPDATE `users` SET `city` = ? WHERE `id` = ?", (city, id))
     
